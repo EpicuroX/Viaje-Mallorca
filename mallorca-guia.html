@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mallorca — Ruta 3 Días</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5EDD8;
+    --ocean: #1B4F72;
+    --turquoise: #2BBFB3;
+    --gold: #C9993A;
+    --terra: #C0623A;
+    --night: #0D1B2A;
+    --mist: #E8EEF2;
+    --text: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--sand);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--ocean) 0%, #0D3552 50%, var(--night) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 20px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(43,191,179,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 60% at 20% 20%, rgba(201,153,58,0.1) 0%, transparent 60%);
+  }
+
+  .wave-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    overflow: hidden;
+  }
+
+  .wave-decoration svg { width: 100%; height: 100%; }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: 24px;
+    position: relative;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    position: relative;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.05em;
+    position: relative;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── DAYS ── */
+  .days-wrapper {
+    padding: 80px 0;
+  }
+
+  .day-block {
+    margin-bottom: 80px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(0,0,0,0.08);
+    letter-spacing: -0.03em;
+  }
+
+  .day-info { flex: 1; }
+
+  .day-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: 4px;
+  }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--ocean);
+    line-height: 1.1;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .section-icon {
+    font-size: 1.1rem;
+  }
+
+  .section-name {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+  }
+
+  /* ── CARDS ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--turquoise);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  }
+
+  .card:hover::before { transform: scaleY(1); }
+
+  .card.alt {
+    background: var(--mist);
+    border-style: dashed;
+  }
+
+  .card.alt::before { background: var(--gold); }
+
+  .card.food {
+    background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
+  }
+  .card.food::before { background: var(--terra); }
+
+  .card.night {
+    background: linear-gradient(135deg, #f0f4f8 0%, #fff 100%);
+  }
+  .card.night::before { background: var(--ocean); }
+
+  .card-text { flex: 1; }
+
+  .card-name {
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .card-tag {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.35);
+    margin-top: 3px;
+  }
+
+  .card-arrow {
+    width: 28px;
+    height: 28px;
+    background: var(--turquoise);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .card.food .card-arrow { background: var(--terra); }
+  .card.night .card-arrow { background: var(--ocean); }
+  .card.alt .card-arrow { background: var(--gold); }
+
+  .card-arrow svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── EXTRA SECTION ── */
+  .extra-block {
+    background: linear-gradient(135deg, var(--ocean) 0%, #0D3552 100%);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .extra-block::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(43,191,179,0.2) 0%, transparent 70%);
+  }
+
+  .extra-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: 10px;
+  }
+
+  .extra-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .extra-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    margin-bottom: 28px;
+  }
+
+  .extra-block .cards .card {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .extra-block .card-name { color: #fff; }
+  .extra-block .card-tag { color: rgba(255,255,255,0.4); }
+  .extra-block .card::before { background: var(--gold); }
+  .extra-block .card-arrow { background: var(--gold); }
+  .extra-block .card:hover { background: rgba(255,255,255,0.14); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+  /* ── TIPS BOX ── */
+  .tips-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 80px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .tips-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ocean);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tips-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+
+  .tips-list li {
+    display: flex;
+    gap: 14px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.7);
+  }
+
+  .tip-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--turquoise);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--night);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent);
+    margin: 0 0 40px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .extra-block { padding: 28px; }
+    .tips-box { padding: 28px; }
+    .day-number { font-size: 3.5rem; }
+    .cards { grid-template-columns: 1fr; }
+    .hero-badges { gap: 8px; }
+  }
+
+  /* scroll animation observer targets */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-eyebrow">Islas Baleares, España</div>
+  <h1 class="hero-title">Mall<em>orca</em></h1>
+  <p class="hero-sub">Ruta de 3 días · Calas · Miradores · Gastronomía</p>
+  <div class="hero-badges">
+    <span class="badge">☀️ Día 1 — Calas + Atardecer</span>
+    <span class="badge">🌊 Día 2 — Calas Secretas</span>
+    <span class="badge">⛰️ Día 3 — Montaña + Miradores</span>
+  </div>
+  <div class="wave-decoration">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,50 1440,60 L1440,120 L0,120 Z" fill="#F5EDD8"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<div class="days-wrapper">
+<div class="container">
+
+  <!-- ── DÍA 1 ── -->
+  <div class="day-block reveal">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-info">
+        <div class="day-label">Día 1</div>
+        <div class="day-title">Calas + Atardecer</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌊</span>
+        <span class="section-name">Mañana — Calas</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Agulla+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cala Agulla</div>
+            <div class="card-tag">Playa principal</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Mesquida+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cala Mesquida</div>
+            <div class="card-tag">Playa</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Molto+Mallorca" target="_blank" class="card alt">
+          <div class="card-text">
+            <div class="card-name">Cala Moltó</div>
+            <div class="card-tag">✦ Alternativa tranquila</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🍽️</span>
+        <span class="section-name">Comida</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Sa+Trobada+Cala+Rajada" target="_blank" class="card food">
+          <div class="card-text">
+            <div class="card-name">Sa Trobada</div>
+            <div class="card-tag">Cala Rajada</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌅</span>
+        <span class="section-name">Atardecer — Elige uno</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Faro+de+Capdepera" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Faro de Capdepera</div>
+            <div class="card-tag">Mirador</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Castillo+de+Capdepera" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Castillo de Capdepera</div>
+            <div class="card-tag">Mirador</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌙</span>
+        <span class="section-name">Cena</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Es+Garbi+Cala+Rajada" target="_blank" class="card night">
+          <div class="card-text">
+            <div class="card-name">Es Garbí</div>
+            <div class="card-tag">Cala Rajada</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── DÍA 2 ── -->
+  <div class="day-block reveal">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-info">
+        <div class="day-label">Día 2</div>
+        <div class="day-title">Calas Secretas</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌊</span>
+        <span class="section-name">Mañana — Calas</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Torta+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cala Torta</div>
+            <div class="card-tag">Cala virgen</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Varques+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cala Varques</div>
+            <div class="card-tag">Cala secreta</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Mitjana+Mallorca" target="_blank" class="card alt">
+          <div class="card-text">
+            <div class="card-name">Cala Mitjana</div>
+            <div class="card-tag">✦ Alternativa</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🍽️</span>
+        <span class="section-name">Comida</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Los+Arcos+Cala+Rajada" target="_blank" class="card food">
+          <div class="card-text">
+            <div class="card-name">Restaurante Los Arcos</div>
+            <div class="card-tag">Cala Rajada</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌙</span>
+        <span class="section-name">Cena + Copa</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Can+Matias+Cala+Rajada" target="_blank" class="card night">
+          <div class="card-text">
+            <div class="card-name">Can Matías</div>
+            <div class="card-tag">Cena</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Wikiki+Gastrobar+Cala+Rajada" target="_blank" class="card night">
+          <div class="card-text">
+            <div class="card-name">Wikiki Gastrobar</div>
+            <div class="card-tag">Copa</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── DÍA 3 ── -->
+  <div class="day-block reveal">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-info">
+        <div class="day-label">Día 3</div>
+        <div class="day-title">Montaña + Miradores</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">⛰️</span>
+        <span class="section-name">Ruta — Miradores</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Mirador+Es+Colomer+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Mirador de Sa Creueta</div>
+            <div class="card-tag">Es Colomer · Imprescindible</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cap+de+Formentor" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cap de Formentor</div>
+            <div class="card-tag">Faro · Extremo norte</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌊</span>
+        <span class="section-name">Cala</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cala+Murta+Mallorca" target="_blank" class="card">
+          <div class="card-text">
+            <div class="card-name">Cala Murta</div>
+            <div class="card-tag">Cala escondida</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🍽️</span>
+        <span class="section-name">Comida</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Pollenca+Mallorca" target="_blank" class="card food">
+          <div class="card-text">
+            <div class="card-name">Pollença</div>
+            <div class="card-tag">Pueblo medieval · Restaurantes</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">
+        <span class="section-icon">🌙</span>
+        <span class="section-name">Última noche</span>
+      </div>
+      <div class="cards">
+        <a href="https://www.google.com/maps/search/?api=1&query=Puerto+Cala+Rajada" target="_blank" class="card night">
+          <div class="card-text">
+            <div class="card-name">Puerto Cala Rajada</div>
+            <div class="card-tag">Paseo nocturno</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Dolce+Vita+Cala+Rajada" target="_blank" class="card night">
+          <div class="card-text">
+            <div class="card-name">Dolce Vita</div>
+            <div class="card-tag">Broche final</div>
+          </div>
+          <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXTRA ── -->
+  <div class="extra-block reveal">
+    <div class="extra-eyebrow">🗺️ Opción extra</div>
+    <div class="extra-title">Alternativa — Día completo</div>
+    <div class="extra-desc">Si quieres cambiar el ritmo y explorar la cara oeste de la isla</div>
+    <div class="cards">
+      <a href="https://www.google.com/maps/search/?api=1&query=Deia+Mallorca" target="_blank" class="card">
+        <div class="card-text">
+          <div class="card-name">Deià</div>
+          <div class="card-tag">Pueblo pintoresco</div>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Valldemossa" target="_blank" class="card">
+        <div class="card-text">
+          <div class="card-name">Valldemossa</div>
+          <div class="card-tag">Cartuja · Historia</div>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Sa+Foradada+Mallorca" target="_blank" class="card">
+        <div class="card-text">
+          <div class="card-name">Sa Foradada</div>
+          <div class="card-tag">Roca perforada · Icónica</div>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── TIPS ── -->
+  <div class="tips-box reveal">
+    <div class="tips-title">
+      <span>💡</span> Consejos para la ruta
+    </div>
+    <ul class="tips-list">
+      <li><div class="tip-dot"></div>Las calas más pequeñas se llenan rápido: llega antes de las 10h para encontrar sitio tranquilo.</li>
+      <li><div class="tip-dot"></div>El Día 3 en Formentor, en temporada alta (jun–sep) es obligatorio reservar plaza de bus o acceder muy temprano con coche.</li>
+      <li><div class="tip-dot"></div>Lleva agua y snacks para las calas sin servicio como Cala Torta o Cala Murta.</li>
+      <li><div class="tip-dot"></div>Cala Varques requiere un pequeño paseo a pie desde el aparcamiento — merece cada paso.</li>
+      <li><div class="tip-dot"></div>Pollença es ideal para comer en la plaza mayor; busca los restaurantes con terraza junto a las escaleras del Calvario.</li>
+      <li><div class="tip-dot"></div>La opción Deià–Valldemossa es perfecta si un día amanece nublado o quieres un plan diferente.</li>
+    </ul>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /days-wrapper -->
+
+<footer>
+  Hecho con 🌊 para vuestro viaje · Todos los enlaces abren en Google Maps
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
